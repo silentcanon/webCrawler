@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Graph Demonstration</title>
     <link rel="stylesheet" type="text/css" href="./static/frame.css">
+    <script src="http://code.jquery.com/jquery-3.0.0.min.js"   integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0="   crossorigin="anonymous"></script>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
@@ -30,6 +31,28 @@
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <script src="./static/drawGraph.js"></script>
     <script src="./static/drawGraphGroup.js"></script>
+    <script>
+        var show_desp = function(id) {
+            $(".demo").hide();
+            $("#"+id).show();
+        }
+        var onClickDrawGraph = function() {
+            show_desp('simple-demo');
+            clearGraph();
+            drawSimple();
+        }
+        var onClickDrawGraphGroup = function() {
+            show_desp('component-demo');
+            clearGraph();
+            drawSimpleGroup();
+        }
+        var onClickAbout = function() {
+            show_desp('about');
+        }
+        $('document').ready(function() {
+            onClickAbout();
+        });
+    </script>
     <nav class="navbar navbar-default">
         <div class="container">
           <div class="navbar-header">
@@ -44,31 +67,58 @@
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
               <li class="active"><a href="#">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#contact">Contact</a></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
-                  <li class="divider"></li>
-                  <li class="dropdown-header">Nav header</li>
-                  <li><a href="#">Separated link</a></li>
-                  <li><a href="#">One more separated link</a></li>
-                </ul>
-              </li>
+              <li><a href="#about" onclick="onClickAbout()">About</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
       </nav>
     <div class="container theme-showcase" role="main">
-        <p class = "col-md-2">
-            <button type="button" class="btn btn-block btn-primary pull-left" onclick="clearGraph();drawSimple()">Simple Graph</button>
-            <button type="button" class="btn btn-block btn-primary pull-left" onclick="clearGraph();drawSimpleGroup()">Graph Components</button>
-        </p>
-        <div class = "jumbotron col-md-10">
-
+        <div class="row">
+            <div class = "col-md-4">
+                <button type="button" class="btn btn-block btn-primary" onclick="onClickDrawGraph()">Simple Graph</button>
+                <button type="button" class="btn btn-block btn-primary" onclick="onClickDrawGraphGroup()">Graph Components</button>
+                <div id="description">
+                    <div class="demo" id="about">
+                        <p>
+                            This is the demo page for the parallel <a href="https://en.wikipedia.org/wiki/Web_crawler">web crawler</a> written in Java.
+                            The source codes could be found <a href="https://github.com/silentcanon/Crawler/tree/master">here</a>.
+                        </p>
+                        <p>
+                            It crawlers a certain number of pages from <a href="http://www.csd.uwo.ca/faculty/solis/cs868b/2014/index.html">this</a> starting page.
+                            The source code of the web crawler could be found <a href="www.google.ca">here</a>.
+                            Click buttons above for the demo.
+                        </p>
+                        <p>
+                            This web page is build using <a href="http://getbootstrap.com">Bootstrap</a> and <a href="https://d3js.org">D3.js</a>
+                        </p>
+                    </div>
+                    <div class="demo" id="simple-demo">
+                        <p>
+                            This demo represents the crawling results.
+                        </p>
+                        <p>
+                            Each node represents one single resource on the Internet.
+                            Each arrow represents the link between online resources.
+                            The resource could be html files, css files, pdf files, images and etc.
+                        </p>
+                        <p>
+                            In this page, nodes in dark blue represent web pages (html files); Orange for image files such as png, gif and jpg. Light blue for others such as pdf.
+                        </p>
+                    </div>
+                    <div class="demo" id="component-demo">
+                        <p>
+                            In the mathematical theory of directed graphs, a graph is said to be strongly connected if every vertex is reachable from every other vertex.
+                            Click <a href="https://en.wikipedia.org/wiki/Strongly_connected_component" target="_blank">here</a> for more details.
+                        </p>
+                        <p>
+                            For the nodes and links represent the web resources, it is interesting to calculate the strongly connected components to illustrate the structure of the web.
+                            In the graph on the right, nodes with the same color belong to one connected component.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class = "jumbotron col-md-8">
+            </div>
         </div>
     </div>
 
